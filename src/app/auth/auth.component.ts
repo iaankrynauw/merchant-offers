@@ -9,6 +9,7 @@ import { SortByDirective } from '../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../shared/pipes/trim.pipe';
 import { User }    from './user';
+import { Session } from './session'
 
 @Component({
   selector: 'auth',
@@ -32,7 +33,7 @@ export class AuthComponent {
   validateUser() {
     console.log("validateUser(" + this.model.email + "," + this.model.password + ")");
     var res = this.dataService.postValidate(this.model.email,this.model.password)
-    .subscribe( console.log( "subscribe") );
+    .subscribe();
     // var res = this.dataService.getCustomers().subscribe();
     console.log(res);
     // AuthComponent.validateUser(this.model);

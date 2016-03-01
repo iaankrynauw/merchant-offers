@@ -14,7 +14,7 @@ export class DataService {
 
     constructor(private http: Http) { }
 
-    postValidate(email: string, password: string) {
+    postValidate(email: string, password: string) : Observable<Session> {
         // console.log("postValidate(" + email + "," + password + ")");
         // return JSON.stringify({"email": email, "password": password});
         let body = new JSON.stringify({"email": email, "password": password});
@@ -25,14 +25,13 @@ export class DataService {
         console.log(options);
 
         return this.http.post(this.stageBaseUrl, body, options )
-                        .map(res  => res.json().name )
-                        .do(name => console.log( name ))
+                        .map(res  => res )
                         .catch(this.handleError);
 
     }
 
     // getCustomers() {
-    //     return this.http.get('src/customers.json')
+    //     return this.http.get('/customers.json')
     //                     .map((res: Response) => res.json())
     //                     .catch(this.handleError);
     // }
@@ -44,8 +43,8 @@ export class DataService {
     }
 
     handleError(error: any) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        console.log(error);
+        // return Observable.throw(error.json().error || 'Server error');
     }
 
 }
