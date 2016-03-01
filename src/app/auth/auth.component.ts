@@ -8,16 +8,17 @@ import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../shared/pipes/trim.pipe';
+import { UserFormComponent } from './user-form.component';
 
 @Component({
   selector: 'auth',
   providers: [DataService],
   templateUrl: 'app/auth/auth.component.html',
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
+  directives: [UserFormComponent, CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
   pipes: [CapitalizePipe, TrimPipe]
 })
-export class AuthComponent {
 
+export class AuthComponent {
   title: string;
   filterText: string;
   listDisplayModeEnabled: boolean;
