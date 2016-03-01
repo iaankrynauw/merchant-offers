@@ -1,6 +1,6 @@
 {
-  "name": "angular2-starter",
-  "author": "Dan Wahlin",
+  "name": "angular2-higuru",
+  "author": "Iaan Krynauw",
   "version": "0.8.0",
   "scripts": {
     "postinstall": "npm run typings install",
@@ -18,7 +18,9 @@
     "es6-shim": "^0.33.4",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.5.15"
+    "zone.js": "0.5.15",
+    "strophe.js": "1.2.4",
+    "jingle": "2.0.0"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
