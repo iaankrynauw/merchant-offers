@@ -24,7 +24,7 @@ export class AuthComponent {
   model = new User("hendrihavenga@gmail.com","password");
   session:Session;
   submitted = false;
-
+  public auth_error:Boolean = false;
   constructor(private dataService: DataService) { }
 
   onSubmit() { this.submitted = true; }
@@ -33,12 +33,13 @@ export class AuthComponent {
 
   validateUser() {
     console.log("validateUser(" + this.model.email + "," + this.model.password + ")");
-    var res = this.dataService.postValidate(this.model.email,this.model.password)
+    this.dataService.postValidate(this.model.email,this.model.password)
         .subscribe(
-            (res) => this.session = new Session(res.accessToken, res.name, res.email ,res.role )
+            data => {this.session = new Session(data.accessToken, data.name, data.email ,data.role )},
+            err => {this.auth_error = true},
+            () =>  console.log(this.session) 
+            // () is the on success
           );
-
-             console.log(this.session);
 
     // var res = this.dataService.getCustomers().subscribe( (res) => console.log(res));
 
