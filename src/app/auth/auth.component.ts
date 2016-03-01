@@ -1,7 +1,6 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
-import {Http} from 'angular2/http';
 //import { Observable } from 'rxjs/Observable';
 import { DataService } from '../shared/services/data.service';
 import { Sorter } from '../shared/sorter';
@@ -21,22 +20,22 @@ import { User }    from './user';
 
 export class AuthComponent {
 
-  model = new User("test@case","test");
+  model = new User("hendrihavenga@gmail.com","password");
   submitted = false;
+
+  constructor(private dataService: DataService) { }
+
   onSubmit() { this.submitted = true; }
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }
 
-  getUser() {
-    console.log("getUser(" + this.model.email + "," + this.model.password + ")");
-    this.validateUser(this.model.email,this.model.password);
+  validateUser() {
+    console.log("validateUser(" + this.model.email + "," + this.model.password + ")");
+    var res = this.dataService.postValidate(this.model.email,this.model.password)
+    .subscribe( console.log( "subscribe") );
+    // var res = this.dataService.getCustomers().subscribe();
+    console.log(res);
     // AuthComponent.validateUser(this.model);
-  }
-
-  validateUser(email: string, password: string){
-    console.log("validateUser(" + email + " " + password + ")");
-// ajax call
-
   }
 
 }
