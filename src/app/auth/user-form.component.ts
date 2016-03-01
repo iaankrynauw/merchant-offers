@@ -8,7 +8,7 @@ import { User }    from './user';
   templateUrl: './app/auth/user-form.html'
 })
 export class UserFormComponent {
-  model = new User("email@address.com","password");
+  model = new User("","");
   submitted = false;
   onSubmit() { this.submitted = true; }
   // TODO: Remove this when we're done
