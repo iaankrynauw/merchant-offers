@@ -11,7 +11,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class DataService {
 
-    stageBaseUrl: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
+    stageBaseUrlAuth: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
+    stageBaseUrlBusinessProfile: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/business_profile';
 
     constructor(private http: Http) { }
 
@@ -25,7 +26,7 @@ export class DataService {
         console.log(body);
         console.log(options);
 
-        return this.http.post(this.stageBaseUrl, body, options )
+        return this.http.post(this.stageBaseUrlAuth, body, options )
                         .map( (res: Response)  => res.json() )
                         .catch(this.handleError);
     }
@@ -35,6 +36,17 @@ export class DataService {
                         .map((res: Response) => res.json())
                         .catch(this.handleError);
     }
+
+    getBusinessProfile(accessToken: string)
+    {
+            let headers = new Headers({ 'Content-Type': 'application/json' , 'X-Auth-Token' : accessToken });
+            let options = new RequestOptions({ headers: headers });
+
+            return this.http.get(stageBaseUrlBusinessProfile, options)
+                            .map((res: Response) => res.json())
+                            .catch(this.handleError);
+    }
+
 
     getOrders(){
       return this.http.get(this.baseUrl + '/orders.json')

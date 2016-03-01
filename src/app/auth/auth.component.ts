@@ -33,8 +33,15 @@ export class AuthComponent {
 
   validateUser() {
     console.log("validateUser(" + this.model.email + "," + this.model.password + ")");
-    var res = this.dataService.postValidate(this.model.email,this.model.password).subscribe( (res) => console.log(res) );
+    var res = this.dataService.postValidate(this.model.email,this.model.password)
+        .subscribe(
+            (res) => this.session = new Session(res.accessToken, res.name, res.email ,res.role )
+          );
+
+             console.log(this.session);
+
     // var res = this.dataService.getCustomers().subscribe( (res) => console.log(res));
+
   }
 
 }
