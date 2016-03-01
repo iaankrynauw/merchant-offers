@@ -22,6 +22,7 @@ import { Session } from './session'
 export class AuthComponent {
 
   model = new User("hendrihavenga@gmail.com","password");
+  session:Session;
   submitted = false;
 
   constructor(private dataService: DataService) { }
@@ -32,11 +33,8 @@ export class AuthComponent {
 
   validateUser() {
     console.log("validateUser(" + this.model.email + "," + this.model.password + ")");
-    var res = this.dataService.postValidate(this.model.email,this.model.password)
-    .subscribe();
-    // var res = this.dataService.getCustomers().subscribe();
-    console.log(res);
-    // AuthComponent.validateUser(this.model);
+    var res = this.dataService.postValidate(this.model.email,this.model.password).subscribe( (res) => console.log(res) );
+    // var res = this.dataService.getCustomers().subscribe( (res) => console.log(res));
   }
 
 }
