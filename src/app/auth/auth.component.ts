@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
+import {Http} from 'angular2/http';
 //import { Observable } from 'rxjs/Observable';
 import { DataService } from '../shared/services/data.service';
 import { Sorter } from '../shared/sorter';
@@ -8,75 +9,34 @@ import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../shared/pipes/trim.pipe';
-import { UserFormComponent } from './user-form.component';
+import { User }    from './user';
 
 @Component({
   selector: 'auth',
   providers: [DataService],
   templateUrl: 'app/auth/auth.component.html',
-  directives: [UserFormComponent, CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
 export class AuthComponent {
-  title: string;
-  filterText: string;
-  listDisplayModeEnabled: boolean;
-  customers: any[] = [];
-  filteredCustomers: any[] = [];
-  sorter: Sorter;
 
-  constructor(private dataService: DataService) { }
+  model = new User("test@case","test");
+  submitted = false;
+  onSubmit() { this.submitted = true; }
+  // TODO: Remove this when we're done
+  get diagnostic() { return JSON.stringify(this.model); }
 
-  ngOnInit() {
-    this.title = 'Login'
-    this.filterText = 'Filter Customers:';
-    this.listDisplayModeEnabled = false;
-
-    this.dataService.getCustomers()
-        .subscribe((customers:any[]) => {
-          this.customers = this.filteredCustomers = customers;
-        });
-
-    this.sorter = new Sorter();
+  getUser() {
+    console.log("getUser(" + this.model.email + "," + this.model.password + ")");
+    this.validateUser(this.model.email,this.model.password);
+    // AuthComponent.validateUser(this.model);
   }
 
-  changeDisplayMode(mode: string) {
-      this.listDisplayModeEnabled = (mode === 'List');
-  }
+  validateUser(email: string, password: string){
+    console.log("validateUser(" + email + " " + password + ")");
+// ajax call
 
-  filterChanged(data: string) {
-    if (data && this.customers) {
-        data = data.toUpperCase();
-        let props = ['firstName', 'lastName', 'address', 'city', 'orderTotal'];
-        let filtered = this.customers.filter(item => {
-            let match = false;
-            for (let prop of props) {
-                //console.log(item[prop] + ' ' + item[prop].toUpperCase().indexOf(data));
-                if (item[prop].toString().toUpperCase().indexOf(data) > -1) {
-                  match = true;
-                  break;
-                }
-            };
-            return match;
-        });
-        this.filteredCustomers = filtered;
-    }
-    else {
-      this.filteredCustomers = this.customers;
-    }
-  }
-
-  deleteCustomer(id: number) {
-
-  }
-
-  sort(prop: string) {
-      //Check for complex type such as 'state.name'
-      if (prop && prop.indexOf('.')) {
-
-      }
-      this.sorter.sort(this.filteredCustomers, prop);
   }
 
 }
