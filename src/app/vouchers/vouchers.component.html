@@ -1,4 +1,4 @@
- {{diagnostic}}
+{{diagnostic}}
  <h3><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Account Profile</h3>
 
 <br />
@@ -9,12 +9,12 @@
       <form role="form">
           <div class="form-group">
           <label for="merchant">Business Profiles</label>
-          <select class="form-control" required >
-            <option *ngFor = "#m of merchants" [value]="model.title">{{m}}</option>
+          <select class="form-control" required [(ngModel)]="active_merchant" (ngModelChange)="onChange()" >
+            <option *ngFor = "#m of merchants" [value]="merchants" >{{m.title}}</option>
           </select>
           <label for="merchant">Stores</label>
           <select class="form-control" required >
-            <option *ngFor = "#s of stores" [value]="model.stores">{{s}}</option>
+            <option *ngFor = "#s of stores" [value]="model">{{s}}</option>
           </select>
           </div>
           <div class="form-group">
@@ -30,3 +30,5 @@
 </div>
 
 <a href="#" [routerLink]="['Auth']" router-params="">Sign Out</a>
+
+

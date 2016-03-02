@@ -16,38 +16,37 @@ export class VouchersComponent {
 
     title: string = 'Business Profile';
     merchants: any = [];
-    accessToken: string;
+    access_token: string;
+    active_merchant: Merchant;
     model: any;
+
     get diagnostic() { return JSON.stringify(this.model); }
+    get diagnostic() { return JSON.stringify(this.active_merchant); }
 
-    constructor(private dataService: DataService, private _routeParams: RouteParams) {
-
-    }
+    constructor(private dataService: DataService, private _routeParams: RouteParams) {}
 
     ngOnInit() {
-      this.accessToken = this._routeParams.get('id');
-      this.dataService.getBusinessProfile(this.accessToken).subscribe(
+      this.access_token = this._routeParams.get('id');
+      this.dataService.getBusinessProfile(this.access_token).subscribe(
         data => { this.merchants = data, console.log(data);},
         err => { console.log(err);},
         () => { this.handleGetSuccess(); }
       );
 
-      this.model = new BusinessProfile(this.merchants, "voucherCode123", 0.01);
-
+      this.model = new BusinessProfile( null,null ,null );
     }
 
     handleGetSuccess() {
       console.log(this.merchants[0].merchant.title);
-      var m = this.merchants;
-      var merchants = [];
-      for var key in m {
+      let m = this.merchants;
+      let merchants: any = [];
+      for let key in m {
         if (m.hasOwnProperty(key)) {
-          // console.log(key + " -> " + m[key].merchant.title);
-          var tmpM = new Merchant(
+          let tmpM = new Merchant(
             m[key].merchant.description,
             m[key].merchant.id,
             m[key].merchant.logo,
-            m[key].merchant.docs,
+            m[key].merchant.supporting_docs,
             m[key].merchant.title,
             m[key].merchant.website
           );
@@ -57,16 +56,9 @@ export class VouchersComponent {
       console.log(merchants);
       this.merchants = merchants;
     }
+
+    onChange(){
+      console.log(this.active_merchant);
+      // this.active_merchant = merchant;
+    }
 }
-
-// export class Merchant {
-//   constructor(
-//     public desc: string,
-//     public id: number,
-//     public logo: string,
-//     public docs: string,
-//     public title: string,
-//     public website: string
-//   ) { }
-// }
-
