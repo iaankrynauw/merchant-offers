@@ -2,6 +2,8 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
 import { DataService } from '../shared/services/data.service';
+import { Voucher } from "./voucher";
+
 
 @Component({
   selector: 'vouchers',
@@ -11,17 +13,25 @@ import { DataService } from '../shared/services/data.service';
 })
 export class VouchersComponent {
 
-	  title: string = 'Business Profile';
+    model = new Voucher(this.merchants, "voucherCode123", 0.01);
+
+    title: string = 'Business Profile';
+    merchants: any = ["Business1","Business2"];
+    accessToken: string;
+
+    get diagnostic() { return JSON.stringify(this.model); }
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {
 
     }
 
-    // ngOnInit() {
-    //   let customerId = parseInt(this._routeParams.get('id'), 10);
-    //   this.dataService.getOrders().subscribe((orders: any[]) => {
-    //     this.filteredOrders = orders.filter(order => order.customerId === customerId);
-    //   });
-    // }
+    ngOnInit() {
+      this.accessToken = this._routeParams.get('id');
+      this.dataService.getBusinessProfile(this.accessToken).subscribe(
+        data => { console.log(data);},
+        err => { console.log(err);},
+        () => { console.log("Success");}
+      );
+    }
 
 }

@@ -22,15 +22,13 @@ export class AuthComponent {
   submitted = false;
   public auth_error: any;
   router: Router;
-
+  get diagnostic() { return JSON.stringify(this.model); }
 
   constructor(private dataService: DataService, private _router: Router) {
    this.router = _router }
 
   onSubmit() { this.submitted = true; }
   // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-
   validateUser() {
     this.auth_error = "";
     this.dataService.postValidate(this.model.email, this.model.password)

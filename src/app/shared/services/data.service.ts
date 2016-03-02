@@ -42,16 +42,9 @@ export class DataService {
             let headers = new Headers({ 'Content-Type': 'application/json' , 'X-Auth-Token' : accessToken });
             let options = new RequestOptions({ headers: headers });
 
-            return this.http.get(stageBaseUrlBusinessProfile, options)
+            return this.http.get(this.stageBaseUrlBusinessProfile, options)
                             .map((res: Response) => res.json())
                             .catch(this.handleError);
-    }
-
-
-    getOrders(){
-      return this.http.get(this.baseUrl + '/orders.json')
-                      .map((res: Response) => res.json())
-                      .catch(this.handleError);
     }
 
     private handleError(error: Response) {
