@@ -55,8 +55,8 @@ export class DataService {
     }
 
     private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        // console.error(error);
+        return Observable.throw(error);
     }
 
 }
