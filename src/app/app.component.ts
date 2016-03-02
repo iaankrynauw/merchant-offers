@@ -10,7 +10,7 @@ import { VouchersComponent } from './vouchers/vouchers.component';
 })
 @RouteConfig([
   { path: '/', as: 'Auth', component: AuthComponent, useAsDefault: true },
-  { path: '/vouchers/:id', as: 'Vouchers', component: VouchersComponent    }
+  { path: '/business_profile/:id', as: 'BusinessProfile', component: VouchersComponent    }
 ])
 export class AppComponent {
 

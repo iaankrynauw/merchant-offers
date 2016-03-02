@@ -11,17 +11,17 @@ import { DataService } from '../shared/services/data.service';
 })
 export class VouchersComponent {
 
-	  title: string = 'Orders';
-    filteredOrders: any[] = [];
+	  title: string = 'Business Profile';
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {
 
     }
 
-    ngOnInit() {
-      let customerId = parseInt(this._routeParams.get('id'), 10);
-      this.dataService.getOrders().subscribe((orders: any[]) => {
-        this.filteredOrders = orders.filter(order => order.customerId === customerId);
-      });
-    }
+    // ngOnInit() {
+    //   let customerId = parseInt(this._routeParams.get('id'), 10);
+    //   this.dataService.getOrders().subscribe((orders: any[]) => {
+    //     this.filteredOrders = orders.filter(order => order.customerId === customerId);
+    //   });
+    // }
+
 }
