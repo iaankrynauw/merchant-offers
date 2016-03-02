@@ -1,17 +1,20 @@
  {{diagnostic}}
-
- <h3><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Business Profile</h3>
+ <h3><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Account Profile</h3>
 
 <br />
-
 
 <div class="row">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
       <form role="form">
           <div class="form-group">
+          <label for="merchant">Business Profiles</label>
           <select class="form-control" required >
-            <option *ngFor = "#p of powers" [value]="model.merchants">{{model.merchants}}</option>
+            <option *ngFor = "#m of merchants" [value]="model.title">{{m}}</option>
+          </select>
+          <label for="merchant">Stores</label>
+          <select class="form-control" required >
+            <option *ngFor = "#s of stores" [value]="model.stores">{{s}}</option>
           </select>
           </div>
           <div class="form-group">
@@ -25,7 +28,5 @@
       </div>
     <div class="col-sm-4"></div>
 </div>
-
-
 
 <a href="#" [routerLink]="['Auth']" router-params="">Sign Out</a>

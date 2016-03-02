@@ -1,7 +1,10 @@
-export class Voucher{
+export class BusinessProfile{
   constructor(
-    public merchants: any[],
+    public merchants: any,
     public code: string,
     public amount: number
   ) { }
 }
+
+
+
