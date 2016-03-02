@@ -37,12 +37,10 @@ export class AuthComponent {
         .subscribe(
             data => {this.session = new Session(data.accessToken, data.name, data.email ,data.role )},
             err => {this.auth_error = true},
-            () =>  console.log(this.session) 
+            () =>  console.log(this.session)
             // () is the on success
           );
-
     // var res = this.dataService.getCustomers().subscribe( (res) => console.log(res));
-
+          )
   }
-
 }
