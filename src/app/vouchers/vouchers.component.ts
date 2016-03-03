@@ -22,6 +22,8 @@ export class VouchersComponent {
     @Input() stores: any[] = [];
     @Input() model: any;
 
+    private postResponse: any;
+
     get diagnostic() { return (JSON.stringify(this.model)); }
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
@@ -31,13 +33,13 @@ export class VouchersComponent {
       this.dataService.getBusinessProfile(this.access_token).subscribe(
         data => { this.merchants = data, console.log(data);},
         err => { console.log(err);},
-        () => { this.handleGetSuccess(); }
+        () => { this.handleGetBusinessProfileSuccess(); }
       );
 
       this.model = new BusinessProfile( null,null ,null , null);
     }
 
-    handleGetSuccess() : void {
+    handleGetBusinessProfileSuccess() : void {
       let m = this.merchants;
       var merchants: any[] = [];
       for (var key in m ) {
@@ -86,13 +88,18 @@ export class VouchersComponent {
       console.log(stores);
       this.stores = stores;
     }
-}
 
-// export class Store {
-//   constructor(
-//     public location_name: string,
-//     public name: string,
-//     public status: string,
-//     public store_id: number,
-//   ) { }
-// }
+    submit(){
+      console.log(this.model);
+      this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
+        data => { this.postResponse = data, console.log(data); },
+        err => { console.log(err); },
+        () => { this.handleRedeemCallSuccess(); }
+      );
+    }
+
+    handleRedeemCallSuccess(){
+      console.log("Redeem Success");
+    }
+
+}

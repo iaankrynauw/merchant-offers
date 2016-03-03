@@ -13,19 +13,15 @@ export class DataService {
 
     stageBaseUrlAuth: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
     stageBaseUrlBusinessProfile: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/business_profile';
-    stageBaseUrlBusinessPlaces: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/|#|/business_places'
+    stageBaseUrlBusinessPlaces: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/|#1|/business_places';
+    stageBaseUrlRedeemCall: string = 'https://stageadmin.ttrumpet.com/v1.0/redemptions';
+
     constructor(private http: Http) { }
 
-    postValidate(email: string, password: string) : Observable {
-        // console.log("postValidate(" + email + "," + password + ")");
-        // return JSON.stringify({"email": email, "password": password});
+    postValidate(email: string, password: string){
         let body = JSON.stringify({"email": email, "password": password});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-
-        console.log(body);
-        console.log(options);
-
         return this.http.post(this.stageBaseUrlAuth, body, options )
                         .map( (res: Response)  => res.json() )
                         .catch(this.handleError);
@@ -55,8 +51,18 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    postRedeemCall(accessToken: string, model: any) {
+        let body = JSON.stringify(model);
+        let headers = new Headers({ 'Content-Type': 'application/json', 'X-Auth-Token': accessToken });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.stageBaseUrlRedeemCall, body, options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+
     private insertTokenIntoUrl(token: string, url: string): string{
-        return url.replace("|#|", token);
+        return url.replace("|#1|", token);
     }
 
     private handleError(error: Response) {
