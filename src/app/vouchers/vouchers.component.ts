@@ -1,9 +1,10 @@
-import { Component } from 'angular2/core';
+import { Component, Input, Output, OnChanges, SimpleChange } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
 import { DataService } from '../shared/services/data.service';
 import { BusinessProfile } from "./business-profile";
 import { Merchant } from "./merchant";
+import { Store } from "./store";
 
 
 @Component({
@@ -15,17 +16,17 @@ import { Merchant } from "./merchant";
 export class VouchersComponent {
 
     title: string = 'Business Profile';
-    merchants: any = [];
-    access_token: string;
-    active_merchant: Merchant;
-    model: any;
 
-    get diagnostic() { return JSON.stringify(this.model); }
-    get diagnostic() { return JSON.stringify(this.active_merchant); }
+    @Input() access_token: string;
+    @Input() merchants: any[] = [];
+    @Input() stores: any[] = [];
+    @Input() model: any;
+
+    get diagnostic() { return (JSON.stringify(this.model)); }
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
 
-    ngOnInit() {
+    ngOnInit() : void {
       this.access_token = this._routeParams.get('id');
       this.dataService.getBusinessProfile(this.access_token).subscribe(
         data => { this.merchants = data, console.log(data);},
@@ -33,14 +34,13 @@ export class VouchersComponent {
         () => { this.handleGetSuccess(); }
       );
 
-      this.model = new BusinessProfile( null,null ,null );
+      this.model = new BusinessProfile( null,null ,null , null);
     }
 
-    handleGetSuccess() {
-      console.log(this.merchants[0].merchant.title);
+    handleGetSuccess() : void {
       let m = this.merchants;
-      let merchants: any = [];
-      for let key in m {
+      var merchants: any[] = [];
+      for (var key in m ) {
         if (m.hasOwnProperty(key)) {
           let tmpM = new Merchant(
             m[key].merchant.description,
@@ -53,12 +53,46 @@ export class VouchersComponent {
           merchants.push(tmpM);
         }
       }
-      console.log(merchants);
+      // console.log(merchants);
       this.merchants = merchants;
     }
 
-    onChange(){
-      console.log(this.active_merchant);
+    getStores() {
+      console.log(this.model.merchant_id);
+      if (this.model.merchant_id != null) {
+        this.dataService.getBusinessPlaces(this.access_token, this.model.merchant_id).subscribe(
+          data => { this.stores = data, console.log(data); },
+          err => { console.log(err); },
+          () => { this.handleGetBusinessPlacesSuccess(); }
+        );
+      }
       // this.active_merchant = merchant;
     }
+
+    handleGetBusinessPlacesSuccess() : void {
+      let s = this.stores;
+      var stores: any[] = [];
+      for (var key in s) {
+        if (s.hasOwnProperty(key)) {
+          let tmpS = new Store(
+            s[key].location_name,
+            s[key].name,
+            s[key].status,
+            s[key].store_id
+          );
+          stores.push(tmpS);
+        }
+      }
+      console.log(stores);
+      this.stores = stores;
+    }
 }
+
+// export class Store {
+//   constructor(
+//     public location_name: string,
+//     public name: string,
+//     public status: string,
+//     public store_id: number,
+//   ) { }
+// }

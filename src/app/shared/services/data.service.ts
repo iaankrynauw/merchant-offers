@@ -13,7 +13,7 @@ export class DataService {
 
     stageBaseUrlAuth: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
     stageBaseUrlBusinessProfile: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/business_profile';
-
+    stageBaseUrlBusinessPlaces: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/|#|/business_places'
     constructor(private http: Http) { }
 
     postValidate(email: string, password: string) : Observable {
@@ -37,14 +37,26 @@ export class DataService {
                         .catch(this.handleError);
     }
 
-    getBusinessProfile(accessToken: string)
-    {
+    getBusinessProfile(accessToken: string){
             let headers = new Headers({ 'Content-Type': 'application/json' , 'X-Auth-Token' : accessToken });
             let options = new RequestOptions({ headers: headers });
 
             return this.http.get(this.stageBaseUrlBusinessProfile, options)
                             .map((res: Response) => res.json())
                             .catch(this.handleError);
+    }
+
+    getBusinessPlaces( accessToken:string, active_merchant: string ){
+        let headers = new Headers({ 'Content-Type': 'application/json', 'X-Auth-Token': accessToken });
+        let options = new RequestOptions({ headers: headers });
+        let url = this.insertTokenIntoUrl(active_merchant, this.stageBaseUrlBusinessPlaces);
+        return this.http.get( url, options)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    private insertTokenIntoUrl(token: string, url: string): string{
+        return url.replace("|#|", token);
     }
 
     private handleError(error: Response) {
