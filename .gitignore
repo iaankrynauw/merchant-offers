@@ -1,6 +1,7 @@
 node_modules
 src/app/**/*.js
 src/app/**/*.js.map
-
+typings/*.d
+typings/**/*.d*
 
 
