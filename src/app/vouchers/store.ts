@@ -3,6 +3,6 @@ export class Store{
     public location_name: string,
     public name: string,
     public status: string,
-    public store_id: number,
+    public store_id: number
   ) { }
 }
