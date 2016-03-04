@@ -1,3 +1,5 @@
+'use strict';
+
 import { Component, Input, Output, OnChanges, SimpleChange } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
@@ -17,10 +19,11 @@ export class VouchersComponent {
 
     title: string = 'Business Profile';
 
-    @Input() access_token: string;
-    @Input() merchants: any[] = [];
-    @Input() stores: any[] = [];
-    @Input() model: any;
+    access_token: string;
+    merchants: any[] = [];
+    stores: any[] = [];
+    model: any;
+    loading: boolean = false;
 
     private postResponse: any;
 
@@ -31,7 +34,7 @@ export class VouchersComponent {
     ngOnInit() : void {
       this.access_token = this._routeParams.get('id');
       this.dataService.getBusinessProfile(this.access_token).subscribe(
-        data => { this.merchants = data, console.log(data);},
+        data => { this.merchants = data;},
         err => { console.log(err);},
         () => { this.handleGetBusinessProfileSuccess(); }
       );
@@ -55,20 +58,8 @@ export class VouchersComponent {
           merchants.push(tmpM);
         }
       }
-      // console.log(merchants);
       this.merchants = merchants;
-    }
-
-    getStores() {
-      console.log(this.model.merchant_id);
-      if (this.model.merchant_id != null) {
-        this.dataService.getBusinessPlaces(this.access_token, this.model.merchant_id).subscribe(
-          data => { this.stores = data, console.log(data); },
-          err => { console.log(err); },
-          () => { this.handleGetBusinessPlacesSuccess(); }
-        );
-      }
-      // this.active_merchant = merchant;
+      this.toggleLoading(false);
     }
 
     handleGetBusinessPlacesSuccess() : void {
@@ -85,21 +76,43 @@ export class VouchersComponent {
           stores.push(tmpS);
         }
       }
-      console.log(stores);
       this.stores = stores;
+      this.toggleLoading(false);
+    }
+
+
+    getStores(merchant_id: any) {
+      this.model.merchant_id = merchant_id;
+      this.toggleLoading(true);
+      if (this.model.merchant_id != null) {
+        this.dataService.getBusinessPlaces(this.access_token, this.model.merchant_id).subscribe(
+          data => { this.stores = data;},
+          err => { console.log(err); this.toggleLoading(false); },
+          () => { this.handleGetBusinessPlacesSuccess(); }
+        );
+      }
+      // this.active_merchant = merchant;
+    }
+    getTest(store_id: any){
+      console.log(store_id);
     }
 
     submit(){
       console.log(this.model);
       this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
-        data => { this.postResponse = data, console.log(data); },
-        err => { console.log(err); },
+        data => { this.postResponse = data, console.log(this.postResponse); },
+        err => { console.log(err); this.toggleLoading(false); },
         () => { this.handleRedeemCallSuccess(); }
       );
     }
 
     handleRedeemCallSuccess(){
       console.log("Redeem Success");
+    }
+
+    toggleLoading(state: boolean){
+      this.loading = state;
+      console.log("Loading? " + this.loading);
     }
 
 }
