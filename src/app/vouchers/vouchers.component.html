@@ -8,7 +8,7 @@
       <div class="col-sm-6">
       <form role="form">
           <div class="form-group">
-          <label for="merchant">Business Profiles</label>
+          <label for="merchant">{{title}}</label>
           <select class="form-control" required [(ngModel)]="model.merchant_id" (click)="getStores()" >
           <!-- value here is the attribute that is returned -->
             <option *ngFor = "#m of merchants" [value]="m.id" >{{m.title}}</option>
