@@ -117,8 +117,6 @@ export class VouchersComponent {
       this.no_errors = false;
     }
 
-    no_errors
-
     handleRedeemCallSuccess(){
       console.log("Redeem Success");
     }

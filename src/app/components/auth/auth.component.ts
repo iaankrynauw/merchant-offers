@@ -4,7 +4,6 @@ import { Router, RouterLink } from 'angular2/router';
 //import { Observable } from 'rxjs/Observable';
 import { SpinnerComponent } from "../spinner/spinner.component";
 import { DataService } from '../../shared/services/data.service';
-import { Sorter } from "../../shared/sorter";
 import { User }    from './user';
 import { Session } from './session'
 
@@ -22,24 +21,29 @@ export class AuthComponent {
   session:Session;
   loading = false;
 
-  public auth_error: any;
+  private auth_error: any;
+  private no_errors: boolean = true;
   router: Router;
   get diagnostic() { return JSON.stringify(this.model); }
 
   constructor(private dataService: DataService, private _router: Router) {
    this.router = _router }
 
-  // TODO: Remove this when we're done
   validateUser() {
     this.toggleLoading(true);
-    this.auth_error = "";
+    this.no_errors = true;
+
     this.dataService.postValidate(this.model.email, this.model.password)
       .subscribe(
           data => { this.session = new Session(data.accessToken, data.name, data.email, data.role) },
-          err => { this.auth_error = err.json().message; this.handlePostError(); },
+          err => { this.handleValidateError(err.json().message); this.handlePostError(); },
           () => { this.handlePostSuccess(); }
       );
-    // var res = this.dataService.getCustomers().subscribe( (res) => console.log(res));
+  }
+
+  handleValidateError(msg: any){
+    this.auth_error = msg;
+    this.no_errors = false;
   }
 
   handlePostError(){
