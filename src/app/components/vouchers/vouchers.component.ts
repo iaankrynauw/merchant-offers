@@ -94,6 +94,7 @@ export class VouchersComponent {
       }
       // this.active_merchant = merchant;
     }
+
     getTest(store_id: any){
       console.log(store_id);
     }
