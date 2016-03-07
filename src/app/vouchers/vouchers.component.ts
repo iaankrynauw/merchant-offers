@@ -23,7 +23,7 @@ export class VouchersComponent {
     merchants: any[] = [];
     stores: any[] = [];
     model: any;
-    loading: boolean = false;
+    loading: boolean = true;
 
     private postResponse: any;
 

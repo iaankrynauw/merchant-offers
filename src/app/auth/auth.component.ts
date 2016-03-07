@@ -16,7 +16,7 @@ import { Session } from './session'
 
 export class AuthComponent {
 
-  model = new User("jurgensvb@gmail.com","password");
+  model = new User("hendrihavenga@gmail.com","password");
   title = "Login";
   session:Session;
   submitted = false;
