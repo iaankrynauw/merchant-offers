@@ -3,7 +3,8 @@
 import { Component, Input, Output, OnChanges, SimpleChange } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
-import { DataService } from '../shared/services/data.service';
+import { DataService } from '../../shared/services/data.service';
+import { SpinnerComponent } from "../spinner/spinner.component";
 import { BusinessProfile } from "./business-profile";
 import { Merchant } from "./merchant";
 import { Store } from "./store";
@@ -12,8 +13,8 @@ import { Store } from "./store";
 @Component({
   selector: 'vouchers',
   providers: [DataService],
-  templateUrl: 'app/vouchers/vouchers.component.html',
-  directives: [CORE_DIRECTIVES, RouterLink]
+  templateUrl: 'app/components/vouchers/vouchers.component.html',
+  directives: [SpinnerComponent, CORE_DIRECTIVES, RouterLink]
 })
 export class VouchersComponent {
 

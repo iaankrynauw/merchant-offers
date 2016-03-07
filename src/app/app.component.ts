@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { ROUTER_DIRECTIVES, RouteConfig } from 'angular2/router';
-import { AuthComponent } from './auth/auth.component';
-import { VouchersComponent } from './vouchers/vouchers.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { VouchersComponent } from './components/vouchers/vouchers.component';
 
 @Component({
   selector: 'app-container',

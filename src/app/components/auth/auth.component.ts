@@ -2,15 +2,15 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { Router, RouterLink } from 'angular2/router';
 //import { Observable } from 'rxjs/Observable';
-import { DataService } from '../shared/services/data.service';
-import { Sorter } from '../shared/sorter';
+import { DataService } from '../../shared/services/data.service';
+import { Sorter } from "../../shared/sorter";
 import { User }    from './user';
 import { Session } from './session'
 
 @Component({
   selector: 'auth',
   providers: [DataService],
-  templateUrl: 'app/auth/auth.component.html',
+  templateUrl: 'app/components/auth/auth.component.html',
   directives: [CORE_DIRECTIVES, RouterLink]
 })
 

@@ -9,8 +9,7 @@ bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
-    bind(LocationStrategy).toClass(HashLocationStrategy)
-]).then(
+    bind(LocationStrategy).toClass(HashLocationStrategy)] ).then(
     success => console.log('AppComponent bootstrapped!'),
     error => console.log(error)
 );
