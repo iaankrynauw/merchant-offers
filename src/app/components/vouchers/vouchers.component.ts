@@ -17,9 +17,9 @@ import { Store } from "./store";
   directives: [SpinnerComponent, CORE_DIRECTIVES, RouterLink]
 })
 export class VouchersComponent {
+    public auth_error: any;
 
     title: string = 'Business Profile';
-
     access_token: string;
     merchants: any[] = [];
     stores: any[] = [];
@@ -99,6 +99,7 @@ export class VouchersComponent {
     }
 
     submit(){
+      this.toggleLoading(true);
       console.log(this.model);
       this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
         data => { this.postResponse = data, console.log(this.postResponse); },
