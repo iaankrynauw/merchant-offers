@@ -17,18 +17,19 @@ import { Store } from "./store";
   directives: [SpinnerComponent, CORE_DIRECTIVES, RouterLink]
 })
 export class VouchersComponent {
-    public auth_error: any;
+    private auth_error: any;
+    private no_errors: boolean = true;
 
-    title: string = 'Business Profile';
-    access_token: string;
-    merchants: any[] = [];
-    stores: any[] = [];
-    model: any;
-    loading: boolean = true;
+    private title: string = 'Business Profile';
+    private access_token: string;
+    private merchants: any[] = [];
+    private stores: any[] = [];
+    private model: any;
+    private loading: boolean = true;
 
     private postResponse: any;
 
-    get diagnostic() { return (JSON.stringify(this.model)); }
+    get diagnostic() { return (JSON.stringify(this.auth_error)); }
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
 
@@ -100,14 +101,23 @@ export class VouchersComponent {
     }
 
     submit(){
+      this.auth_error = "";
+      this.no_errors = true;
+
       this.toggleLoading(true);
-      console.log(this.model);
       this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
         data => { this.postResponse = data, console.log(this.postResponse); },
-        err => { console.log(err); this.toggleLoading(false); },
+        err => { this.handleSubmitError(err._body); this.toggleLoading(false); },
         () => { this.handleRedeemCallSuccess(); }
       );
     }
+
+    handleSubmitError(msg: any){
+      this.auth_error = msg;
+      this.no_errors = false;
+    }
+
+    no_errors
 
     handleRedeemCallSuccess(){
       console.log("Redeem Success");
