@@ -1,26 +1,42 @@
 'use strict';
+
 import {Component, Input, OnDestroy} from 'angular2/core';
 
 @Component({
-    selector: 'my-spinner',
-    // template: 'Hello Spinner Component'
-    templateUrl: 'app/components/spinner/spinner.html'
+  selector: 'my-spinner',
+  templateUrl: 'app/components/spinner/spinner.html'
 })
-
 export class SpinnerComponent implements OnDestroy {
-    private loading: boolean = true;
+  private currentTimeout: number;
+  private isDelayedRunning: boolean = false;
 
-    ngOnInit(): any {
-        console.log("Spinner Init");
+  @Input()
+  public delay: number = 5;
+
+  @Input()
+  public set isRunning(value: boolean) {
+    if (!value) {
+      this.cancelTimeout();
+      this.isDelayedRunning = false;
+      return;
     }
 
-    @Input()
-    public set isLoading(value: boolean) {
-      this.loading = value;
-      console.log("Spinner loading? " + this.loading);
+    if (this.currentTimeout) {
+      return;
     }
 
-    ngOnDestroy(): any {
-      this.loading = false;
-    }
+    this.currentTimeout = setTimeout(() => {
+      this.isDelayedRunning = value;
+      this.cancelTimeout();
+    }, this.delay);
+  }
+
+  private cancelTimeout(): void {
+    clearTimeout(this.currentTimeout);
+    this.currentTimeout = undefined;
+  }
+
+  ngOnDestroy(): any {
+    this.cancelTimeout();
+  }
 }

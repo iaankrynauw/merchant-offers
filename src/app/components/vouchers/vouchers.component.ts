@@ -113,7 +113,6 @@ export class VouchersComponent {
 
     toggleLoading(state: boolean){
       this.loading = state;
-      console.log("Loading? " + this.loading);
     }
 
 }
