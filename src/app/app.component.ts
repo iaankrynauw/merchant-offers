@@ -6,8 +6,45 @@ import { TermsComponent } from './components/terms/terms.component';
 
 @Component({
   selector: 'app-container',
-  template: `<router-outlet></router-outlet>`,
-  directives: [ROUTER_DIRECTIVES],
+  template: `
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header col-sx-5">
+        <a href="#"><img src="images/ttrumpet.png"></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a [routerLink]="['Auth']">Home</a></li>
+        <li><a [routerLink]="['Terms']">Terms and Conditions</a></li>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right col-sx-5">
+        <li ><a [routerLink]="['Auth']"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+
+
+  <footer>
+      <div class="navbar navbar-fixed-bottom">
+          <div class="navbar-inner footer">
+              <div class="container">
+                  <footer>
+                      <div class="row">
+                          <div class="col-md-12">
+                          </div>
+                      </div>
+                  </footer>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  `,
+  // templareUrl: 'app/app.html',
+  directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
   { path: '/', as: 'Auth', component: AuthComponent, useAsDefault: true },
