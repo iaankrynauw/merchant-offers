@@ -13,17 +13,15 @@
                 </h3>
         </div>
     </header>
-
   <br />
+</div>
 
-  <div class="container">
-      <div>
+  <div class="container-fluid">
+      <div div class="col-sm-6 col-sm-offset-3">
         <form (ngSubmit)="validateUser()" #authForm="ngForm">
           <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" required
-              [(ngModel)]="model.email"
-                ngControl="email"  #email="ngForm" >
+            <label for="auth-email">Email address</label>
+            <input type="email" class="form-control" id="auth-email" required [(ngModel)]="model.email" ngControl="email"  #email="ngForm" >
             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
               Email address is required
             </div>
@@ -49,7 +47,6 @@
       </div>
 
     </div>
-</div>
 
 
 

@@ -32,8 +32,8 @@
 
   <div class="form-group row">
     <div class="col-sm-8 col-xs-7">
-     <label for="merchant">Stores</label>
-     <select class="form-control" required [(ngModel)]="model.store_id" #store (change)="getTest(store.value)">
+     <label for="store">Stores</label>
+     <select class="form-control" id="store" required [(ngModel)]="model.store_id" #store (change)="setStore(store.value)">
       <option *ngFor = "#s of stores" [value]="s.store_id" >{{s.name}}</option>
     </select>
   </div>

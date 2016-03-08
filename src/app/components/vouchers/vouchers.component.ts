@@ -94,14 +94,15 @@ export class VouchersComponent {
       // this.active_merchant = merchant;
     }
 
-    getTest(store_id: any){
+    setStore(store_id: any){
+      this.model.store_id = store_id;
       console.log(store_id);
     }
 
     submit(){
       this.auth_error = "";
       this.no_errors = true;
-
+      console.log(this.model);
       this.toggleLoading(true);
       this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
         data => { this.postResponse = data, console.log(this.postResponse); },
