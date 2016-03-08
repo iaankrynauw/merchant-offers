@@ -22,7 +22,8 @@
  <div class="form-group row">
     <div class="col-sm-8 col-xs-7">
       <label for="merchant control-label" class="account-profile-label" >{{title}}</label>
-      <select class="form-control" id="merchant" required [(ngModel)]="model.merchant_id" #merchant (change)="getStores(merchant.value)" >
+      <select class="form-control"  id="merchant" required [(ngModel)]="model.merchant_id" #merchant (change)="getStores(merchant.value)" >
+        <option value="-1" selected >Please select an option below:</option>
         <option *ngFor = "#m of merchants" [value]="m.id" >{{m.title}}</option>
       </select>
     </div>
@@ -39,7 +40,8 @@
     <div class="col-sm-8 col-xs-7">
      <label for="store">Stores</label>
      <select class="form-control" id="store" required [(ngModel)]="model.store_id" #store (change)="setStore(store.value)">
-      <option *ngFor = "#s of stores" [value]="s.store_id" >{{s.name}}</option>
+        <option value="-1" selected>Please select an option below:</option>
+        <option *ngFor = "#s of stores" [value]="s.store_id" >{{s.name}}</option>
     </select>
   </div>
 </div>

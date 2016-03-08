@@ -84,8 +84,8 @@ export class VouchersComponent {
 
     getStores(merchant_id: any) {
       this.model.merchant_id = merchant_id;
-      this.toggleLoading(true);
-      if (this.model.merchant_id != null) {
+      if (this.model.merchant_id > 0 && this.model.merchant_id != null) {
+        this.toggleLoading(true);
         this.dataService.getBusinessPlaces(this.access_token, this.model.merchant_id).subscribe(
           data => { this.stores = data;},
           err => { console.log(err); this.toggleLoading(false); },
@@ -101,16 +101,19 @@ export class VouchersComponent {
     }
 
     submit(){
-      this.auth_error = "";
-      this.no_errors = true;
-      console.log(this.model);
-      this.toggleLoading(true);
-      this.redeem_success = false;
-      this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
-        data => { this.postResponse = data, console.log(this.postResponse); },
-        err => { this.handleSubmitError(err);console.log(err); this.toggleLoading(false); },
-        () => { this.handleRedeemCallSuccess(); }
-      );
+        this.auth_error = "";
+        this.no_errors = true;
+        console.log(this.model);
+        this.redeem_success = false;
+
+      if (this.model.merchant_id > 0 && this.model.store_id > 0) {
+        this.toggleLoading(true);
+        this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
+          data => { this.postResponse = data, console.log(this.postResponse); },
+          err => { this.handleSubmitError(err);console.log(err); this.toggleLoading(false); },
+          () => { this.handleRedeemCallSuccess(); }
+        );
+      }
     }
 
     handleSubmitError(msg: any){
