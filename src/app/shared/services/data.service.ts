@@ -56,7 +56,7 @@ export class DataService {
         let headers = new Headers({ 'Content-Type': 'application/json', 'X-Auth-Token': accessToken });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.stageBaseUrlRedeemCall, body, options)
-            .map((res: Response) => res.json())
+            .map((res: Response) => res)
             .catch(this.handleError);
     }
 
@@ -66,7 +66,7 @@ export class DataService {
     }
 
     private handleError(error: Response) {
-        // console.error(error);
+        console.error(error);
         return Observable.throw(error);
     }
 

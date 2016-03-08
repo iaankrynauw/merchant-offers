@@ -27,6 +27,7 @@ export class VouchersComponent {
     private model: any;
     private loading: boolean = true;
     private postResponse: any;
+    private redeem_success: boolean = false;
 
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
@@ -104,20 +105,25 @@ export class VouchersComponent {
       this.no_errors = true;
       console.log(this.model);
       this.toggleLoading(true);
+      this.redeem_success = false;
       this.dataService.postRedeemCall(this.access_token, this.model).subscribe(
         data => { this.postResponse = data, console.log(this.postResponse); },
-        err => { this.handleSubmitError(err._body); this.toggleLoading(false); },
+        err => { this.handleSubmitError(err);console.log(err); this.toggleLoading(false); },
         () => { this.handleRedeemCallSuccess(); }
       );
     }
 
     handleSubmitError(msg: any){
-      this.auth_error = msg;
+      this.auth_error = msg._body;
       this.no_errors = false;
     }
 
     handleRedeemCallSuccess(){
       console.log("Redeem Success");
+      this.redeem_success = true;
+      this.toggleLoading(false);
+      this.model.sparkflycode = null;
+      this.model.subtotal = null
     }
 
     toggleLoading(state: boolean){
