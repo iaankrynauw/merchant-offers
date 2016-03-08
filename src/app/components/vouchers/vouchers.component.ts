@@ -123,7 +123,7 @@ export class VouchersComponent {
       this.redeem_success = true;
       this.toggleLoading(false);
       this.model.sparkflycode = null;
-      this.model.subtotal = null
+      this.model.subtotal = null;
     }
 
     toggleLoading(state: boolean){
