@@ -17,14 +17,13 @@ import { Session } from './session'
 export class AuthComponent {
 
   model = new User("hendrihavenga@gmail.com","password");
-  title = "Login";
-  session:Session;
-  loading = false;
+  private title = "Login";
+  private session:Session;
+  private loading = false;
 
   private auth_error: any;
   private no_errors: boolean = true;
   router: Router;
-  get diagnostic() { return JSON.stringify(this.model); }
 
   constructor(private dataService: DataService, private _router: Router) {
    this.router = _router }

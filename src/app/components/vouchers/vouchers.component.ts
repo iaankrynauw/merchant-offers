@@ -26,10 +26,8 @@ export class VouchersComponent {
     private stores: any[] = [];
     private model: any;
     private loading: boolean = true;
-
     private postResponse: any;
 
-    get diagnostic() { return (JSON.stringify(this.auth_error)); }
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
 
