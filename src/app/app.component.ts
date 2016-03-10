@@ -3,6 +3,7 @@ import { ROUTER_DIRECTIVES, RouteConfig } from 'angular2/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { VouchersComponent } from './components/vouchers/vouchers.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { PrivacyPolicyComponent } from './components/terms/privacy-policy.component';
 
 @Component({
   selector: 'app-container',
@@ -49,7 +50,8 @@ import { TermsComponent } from './components/terms/terms.component';
 @RouteConfig([
   { path: '/', as: 'Auth', component: AuthComponent, useAsDefault: true },
   { path: '/business_profile/:id', as: 'BusinessProfile', component: VouchersComponent    },
-  { path: '/terms_and_conditions/', as: 'Terms', component: TermsComponent    }
+  { path: '/terms_and_conditions/', as: 'Terms', component: TermsComponent    },
+  { path: '/terms_and_conditions/privacy', as: 'PrivacyPolicy', component: PrivacyPolicyComponent    }
 ])
 export class AppComponent {
 
