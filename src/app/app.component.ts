@@ -4,6 +4,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { VouchersComponent } from './components/vouchers/vouchers.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyPolicyComponent } from './components/terms/privacy-policy.component';
+import { SoftwareLicenseComponent } from './components/terms/software-license.component';
 
 @Component({
   selector: 'app-container',
@@ -51,7 +52,8 @@ import { PrivacyPolicyComponent } from './components/terms/privacy-policy.compon
   { path: '/', as: 'Auth', component: AuthComponent, useAsDefault: true },
   { path: '/business_profile/:id', as: 'BusinessProfile', component: VouchersComponent    },
   { path: '/terms_and_conditions/', as: 'Terms', component: TermsComponent    },
-  { path: '/terms_and_conditions/privacy', as: 'PrivacyPolicy', component: PrivacyPolicyComponent    }
+  { path: '/terms_and_conditions/privacy', as: 'PrivacyPolicy', component: PrivacyPolicyComponent    },
+  { path: '/terms_and_conditions/software-license', as: 'SoftwareLicense', component: SoftwareLicenseComponent    }
 ])
 export class AppComponent {
 
