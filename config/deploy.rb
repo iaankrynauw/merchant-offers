@@ -8,7 +8,7 @@ set :repo_url, 'https://github.com/Wihan/merchant-offers.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/ttrumpet_offers/test_deploy/ttrumpet_offers'
+set :deploy_to, '/home/sparkfly/ttrumpet/ttrumpet_offers_deploy_test'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -53,8 +53,17 @@ task :npm_install do
     end
 end
 
+task :build do
+   on roles(:app), in: :sequence, wait: 5 do
+  within release_path do
+    execute :npm, "run tsc"
+    end
+  end
+end
+
+
 after :publishing, :restart
 after :published, :npm_install
-
+after :npm_install, :build
 
 end
