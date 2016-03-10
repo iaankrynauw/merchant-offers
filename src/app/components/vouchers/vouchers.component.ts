@@ -28,7 +28,7 @@ export class VouchersComponent {
     private loading: boolean = true;
     private postResponse: any;
     private redeem_success: boolean = false;
-
+    // get diagnostic() { return JSON.stringify(this.model) };
 
     constructor(private dataService: DataService, private _routeParams: RouteParams) {}
 
