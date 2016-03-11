@@ -1,4 +1,8 @@
+
 node_modules
+dist/
+config/deploy/deploy.txt
+npm-debug.log
 src/app/**/*.js
 src/app/**/*.js.map
 typings/*.d
