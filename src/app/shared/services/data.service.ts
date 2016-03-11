@@ -11,10 +11,15 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class DataService {
 
-    stageBaseUrlAuth: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
-    stageBaseUrlBusinessProfile: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/business_profile';
-    stageBaseUrlBusinessPlaces: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/|#1|/business_places';
-    stageBaseUrlRedeemCall: string = 'https://stageadmin.ttrumpet.com/v1.0/redemptions';
+    // stageBaseUrlAuth: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/sign_in';
+    // stageBaseUrlBusinessProfile: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/business_profile';
+    // stageBaseUrlBusinessPlaces: string = 'https://stageadmin.ttrumpet.com/v2.0/merchant/|#1|/business_places';
+    // stageBaseUrlRedeemCall: string = 'https://stageadmin.ttrumpet.com/v1.0/redemptions';
+
+    stageBaseUrlAuth: string = 'https://admin.ttrumpet.com/v2.0/merchant/sign_in';
+    stageBaseUrlBusinessProfile: string = 'https://admin.ttrumpet.com/v2.0/merchant/business_profile';
+    stageBaseUrlBusinessPlaces: string = 'https://admin.ttrumpet.com/v2.0/merchant/|#1|/business_places';
+    stageBaseUrlRedeemCall: string = 'https://admin.ttrumpet.com/v1.0/redemptions';
 
     constructor(private http: Http) { }
 
