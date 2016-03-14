@@ -6,7 +6,7 @@
     "postinstall": "npm run typings install",
     "tsc": "tsc",
     "tsc:w": "tsc --watch",
-    "live": "live-server --open=src",
+    "live": "live-server",
     "start": "concurrently \"npm run tsc:w\" \"npm run live\" ",
     "typings": "typings"
   },
@@ -24,6 +24,9 @@
     "concurrently": "^2.0.0",
     "live-server": "^0.9.2",
     "typescript": "^1.9.0-dev.20160304",
-    "typings":"^0.6.9"
+    "typings":"^0.6.9",
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.8.0",
+    "del": "^2.1.0"
   }
 }
