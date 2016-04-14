@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir":"dist/app",
+    // "outDir": "dist/app",
+    "outFile": "dist/bundle.js",
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",

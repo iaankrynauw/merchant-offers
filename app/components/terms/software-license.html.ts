@@ -1,3 +1,4 @@
+export const htmlSoftwareLicense  = `
 <div class="container-fluid col-sm-10 col-sm-offset-1">
 
       <h3 id="software-license-agreement">Software Licences</h3>
@@ -196,3 +197,4 @@
 
 
     </div>
+`;

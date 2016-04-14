@@ -1,5 +1,6 @@
-  <router-outlet></router-outlet>
+  export const htmlApp = `
 
+  <router-outlet></router-outlet>
 
   <footer>
       <div class="navbar navbar-fixed-bottom">
@@ -15,3 +16,5 @@
           </div>
       </div>
   </footer>
+
+`;

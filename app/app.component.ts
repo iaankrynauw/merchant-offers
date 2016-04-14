@@ -5,11 +5,12 @@ import { VouchersComponent } from './components/vouchers/vouchers.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyPolicyComponent } from './components/terms/privacy-policy.component';
 import { SoftwareLicenseComponent } from './components/terms/software-license.component';
+import {htmlApp} from './app.html';
 
 @Component({
   selector: 'app-container',
   directives: [ROUTER_DIRECTIVES],
-  templateUrl: 'app/app.html'
+  template: htmlApp
 })
 @RouteConfig([
   { path: '/', as: 'Auth', component: AuthComponent, useAsDefault: true },

@@ -1,3 +1,4 @@
+  export const htmlPrivacy = `
 <div class="container-fluid col-sm-10 col-sm-offset-1">
 
 <h3 id="privacy-policy">Privacy Policy</h3>
@@ -80,3 +81,4 @@
         We may modify our Privacy Policy from time to time for various reasons including to improve our privacy practices, to reflect changes to our Service, and to comply with relevant law.  Any changes we make to our Privacy Policy in will be posted on our webpage www.ttrumpet.com and implemented as any change of ttrumpet Terms and Conditions.
       </p>
 </div>
+`;

@@ -8,12 +8,12 @@ import { SpinnerComponent } from "../spinner/spinner.component";
 import { BusinessProfile } from "./business-profile";
 import { Merchant } from "./merchant";
 import { Store } from "./store";
-
+import { htmlVouchers } from './vouchers.component.html';
 
 @Component({
   selector: 'vouchers',
   providers: [DataService],
-  templateUrl: 'app/components/vouchers/vouchers.component.html',
+  template: htmlVouchers,
   directives: [SpinnerComponent, CORE_DIRECTIVES, RouterLink]
 })
 export class VouchersComponent {

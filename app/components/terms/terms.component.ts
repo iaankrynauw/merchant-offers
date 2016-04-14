@@ -3,11 +3,12 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { Router, RouterLink } from 'angular2/router';
 //import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../shared/services/data.service';
+import { htmlTerms } from './terms.html';
 
 @Component({
   selector: 'my-terms',
   providers: [DataService],
-  templateUrl: 'app/components/terms/terms.html',
+  template: htmlTerms,
   directives: [CORE_DIRECTIVES, RouterLink]
 })
 

@@ -1,10 +1,11 @@
 'use strict';
 
 import {Component, Input, OnDestroy} from 'angular2/core';
+import {htmlSpinner} from './spinner.html';
 
 @Component({
   selector: 'my-spinner',
-  templateUrl: 'app/components/spinner/spinner.html'
+  template: htmlSpinner
 })
 export class SpinnerComponent implements OnDestroy {
   private currentTimeout: number;

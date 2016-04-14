@@ -3,11 +3,12 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { Router, RouterLink } from 'angular2/router';
 //import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../shared/services/data.service';
+import { htmlPrivacy } from './privacy.html';
 
 @Component({
   selector: 'my-privacy-policy',
   providers: [DataService],
-  templateUrl: 'app/components/terms/privacy.html',
+  template: htmlPrivacy,
   directives: [CORE_DIRECTIVES, RouterLink]
 })
 

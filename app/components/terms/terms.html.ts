@@ -1,3 +1,4 @@
+export const htmlTerms  = `
 <div class="container-fluid col-sm-10 col-sm-offset-1">
 
   <h1>T’s and C’s</h1>
@@ -325,3 +326,4 @@
 
 
 </div>
+`;

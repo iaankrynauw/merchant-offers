@@ -6,11 +6,12 @@ import { SpinnerComponent } from "../spinner/spinner.component";
 import { DataService } from '../../shared/services/data.service';
 import { User }    from './user';
 import { Session } from './session'
+import {htmlAuth} from './auth.component.html';
 
 @Component({
   selector: 'auth',
   providers: [DataService],
-  templateUrl: 'app/components/auth/auth.component.html',
+  template: htmlAuth,
   directives: [SpinnerComponent, CORE_DIRECTIVES, RouterLink]
 })
 
