@@ -17,7 +17,7 @@
 # group is considered to be the first unless any  hosts have the primary
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
- role :app, %w{sparkfly@104.130.69.84}
+ role :app, %w{stage2}
  # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
  # role :db,  %w{deploy@example.com}
 
