@@ -6,6 +6,10 @@
     "postinstall": "npm run typings install",
     "tsc": "tsc",
     "tsc:w": "tsc --watch",
+    "public:clean": "rm -rf public/*",
+    "public:move": "concurrently \"cp index.html public/\" \"cp -r styles/ public/\" \"cp -r images/ public/\" \"mkdir public/dist\" ",
+    "public:uglify": "uglifyjs dist/bundle.js --source-map dist/bundle.js.map  --in-source-map dist/bundle.js.map -o public/dist/bundle.js",
+    "public": "concurrently \"npm run public:clean\" \"npm run public:move\" \"npm run public:uglify\" ",
     "live": "live-server",
     "start": "concurrently \"npm run tsc:w\" \"npm run live\" ",
     "typings": "typings"
@@ -13,20 +17,18 @@
   "license": "ISC",
   "dependencies": {
     "angular2": "2.0.0-beta.9",
-    "systemjs": "0.19.22",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.33.13",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.22",
     "zone.js": "0.5.15"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "del": "^2.1.0",
     "live-server": "^0.9.2",
     "typescript": "^1.9.0-dev.20160304",
-    "typings":"^0.6.9",
-    "gulp": "^3.9.0",
-    "gulp-typescript": "^2.8.0",
-    "del": "^2.1.0"
+    "typings": "^0.6.9"
   }
 }
