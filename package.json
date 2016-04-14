@@ -6,10 +6,10 @@
     "postinstall": "npm run typings install",
     "tsc": "tsc",
     "tsc:w": "tsc --watch",
-    "public:clean": "rm -rf public/*",
-    "public:move": "concurrently \"cp index.html public/\" \"cp -r styles/ public/\" \"cp -r images/ public/\" \"mkdir public/dist\" ",
+    "public:clean": "rm -rf public && mkdir public && mkdir public/dist",
+    "public:move": "concurrently \"cp index.html public/\" \"cp -r styles/ public/\" \"cp -r images/ public/\" ",
     "public:uglify": "uglifyjs dist/bundle.js --source-map dist/bundle.js.map  --in-source-map dist/bundle.js.map -o public/dist/bundle.js",
-    "public": "concurrently \"npm run public:clean\" \"npm run public:move\" \"npm run public:uglify\" ",
+    "public": "npm run public:clean && npm run public:move && npm run public:uglify",
     "live": "live-server",
     "start": "concurrently \"npm run tsc:w\" \"npm run live\" ",
     "typings": "typings"
