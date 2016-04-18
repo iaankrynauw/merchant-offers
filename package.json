@@ -8,7 +8,7 @@
     "tsc:w": "tsc --watch",
     "public:clean": "rm -rf public && mkdir public && mkdir public/dist",
     "public:move": "concurrently \"cp index.html public/\" \"cp terms.html public/\" \"cp -r styles/ public/\" \"cp -r images/ public/\" ",
-    "public:uglify": "uglifyjs dist/bundle.js --source-map dist/bundle.js.map  --in-source-map dist/bundle.js.map -o public/dist/bundle.js",
+    "public:uglify": "./node_modules/uglifyjs/bin/uglifyjs dist/bundle.js --source-map dist/bundle.js.map  --in-source-map dist/bundle.js.map -o public/dist/bundle.js",
     "public": "npm run public:clean && npm run public:move && npm run public:uglify",
     "live": "live-server",
     "start": "concurrently \"npm run tsc:w\" \"npm run live\" ",
@@ -29,6 +29,7 @@
     "del": "^2.1.0",
     "live-server": "^0.9.2",
     "typescript": "^1.9.0-dev.20160304",
-    "typings": "^0.6.9"
+    "typings": "^0.6.9",
+    "uglifyjs": "^2.4.10"
   }
 }
